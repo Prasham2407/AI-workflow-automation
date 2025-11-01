@@ -15,6 +15,12 @@ export const SubmitButton = () => {
   const { nodes, edges } = useStore(selector, shallow);
 
   const handleSubmit = async () => {
+    // Validation: Check if at least one node exists
+    if (!nodes || nodes.length === 0) {
+      showToast('Please add at least one node to the workflow before submitting', 'error');
+      return;
+    }
+
     setIsLoading(true);
     
     // Show processing toast
